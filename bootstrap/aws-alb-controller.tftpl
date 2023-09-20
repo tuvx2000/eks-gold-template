@@ -1,0 +1,6 @@
+clusterName: gold-template-cluster-CICD
+replicaCount: 1
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::${ACCOUNT_ID}:role/gold-template-cluster-CICD-aws-load-balancer-controller-sa-irsa
+  create: true

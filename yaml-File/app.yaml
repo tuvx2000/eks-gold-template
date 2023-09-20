@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-text-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: custom-text
+  template:
+    metadata:
+      labels:
+        app: custom-text
+    spec:
+      containers:
+        - name: custom-text-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: CUSTOM_TEXT
+              value: "Welcome to my custom text app!"
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: custom-text-service
+spec:
+  selector:
+    app: custom-text
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
